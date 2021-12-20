@@ -34,5 +34,6 @@ public:
 	void init(int argc, char* argv[]);
 	void exit();
 	static void onScreenSizeChange(GLsizei w, GLsizei h);
+	static void OnIdle();
 };
 
