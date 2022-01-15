@@ -147,13 +147,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorRGB.cpp" />
+    <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineConfiguration.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Point3D.cpp" />
+    <ClCompile Include="PrimitiveCube.cpp" />
+    <ClCompile Include="PrimitiveLine.cpp" />
+    <ClCompile Include="PrimitivePoint.cpp" />
+    <ClCompile Include="PrimitiveQuad.cpp" />
+    <ClCompile Include="PrimitiveTriangle.cpp" />
+    <ClCompile Include="ShapeObject.cpp" />
+    <ClCompile Include="TransformableObject.cpp" />
+    <ClCompile Include="UpdateableObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorRGB.h" />
+    <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineConfiguration.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Point3D.h" />
+    <ClInclude Include="PrimitiveCube.h" />
+    <ClInclude Include="PrimitiveLine.h" />
+    <ClInclude Include="PrimitivePoint.h" />
+    <ClInclude Include="PrimitiveQuad.h" />
+    <ClInclude Include="PrimitiveTriangle.h" />
+    <ClInclude Include="ShapeObject.h" />
+    <ClInclude Include="TransformableObject.h" />
+    <ClInclude Include="UpdateableObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

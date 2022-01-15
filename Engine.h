@@ -8,13 +8,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-static const GLfloat lightPos[] = { 100.0f, 200.0f, 0.0f, 1.0f };
-static const GLfloat lightAmb[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-static const GLfloat lightDif[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-static const GLfloat lightSpc[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-static GLfloat lookA;
-static GLfloat angle;
+#include "PrimitivePoint.h"
+#include "PrimitiveLine.h"
+#include "PrimitiveTriangle.h"
+#include "PrimitiveQuad.h"
+#include "Player.h"
+#include "PrimitiveCube.h"
 
 class Engine
 {
@@ -26,7 +25,8 @@ private:
 public:
 	static Engine* engine;
 	static Engine* getInstance();
-
+	static Player myPlayer;
+	
 
 	void clearScreen();
 	void start();
@@ -35,5 +35,7 @@ public:
 	void exit();
 	static void onScreenSizeChange(GLsizei w, GLsizei h);
 	static void OnIdle();
+	static void processSpecialKeys(int key, int xx, int yy);
+
 };
 
