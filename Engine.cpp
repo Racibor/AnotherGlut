@@ -20,9 +20,12 @@ void Engine::clearScreen()
 
 }
 
-float angle = 0.0;
-float lx = 0.0f, lz = -1.0f;
-float x = 0.0f, z = 5.0f;
+struct playerData {
+	float angle;
+	float lx, lz;
+	float x, z;
+}pd = {0.0,0.0,-1.0,0.0,5.0};
+
 
 //GLfloat LightAmb[] = { 0.1, 0.1, 0.1, 1.0 };
 //GLfloat LightDif[] = { 0.7, 0.7, 0.7, 1.0 };
@@ -32,6 +35,7 @@ float x = 0.0f, z = 5.0f;
 void Engine::start()
 {
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_LIGHTING);
 
 	GLfloat LightAmb[] = { 0.1, 0.1, 0.1, 1.0 };
@@ -60,19 +64,19 @@ void Engine::start()
 void Engine::loop(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);  //TO MUSI BYÆ
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  //TO MUSI BYÆ
 	glMatrixMode(GL_MODELVIEW);
 
 
 	glm::mat4 MatM = glm::translate(glm::vec3(0.0f, 0.0f, -200.0f));
 	glLoadMatrixf(glm::value_ptr(MatM));   //TU SIE USTAWIA I WRZUCA CENTRUM RYSOWANKA
-	gluLookAt(x, 1.0f, z, x + lx, 1.0f, z + lz, 0.0f, 1.0f, 0.0f);
+	gluLookAt(pd.x, 1.0f, pd.z, pd.x + pd.lx, 1.0f, pd.z + pd.lz, 0.0f, 1.0f, 0.0f);
 
 
 	//TUTAJ WRZUCAC CO CHCECIE
 
 	PrimitivePoint P(Point3D(-5.0f, -5.0f, -5.0f), ColorRGB(1.0f, 1.0f, 1.0f));
-	PrimitiveLine myLine(Point3D(52.0f, -10.0f, -10.0f), Point3D(0.0f, 10.0f, -10.0f), ColorRGB(1.0f, 0.0f, 0.0f));
+	PrimitiveLine myLine(Point3D(-25.0f, -10.0f, 30.0f), Point3D(25.0f, 10.0f, 30.0f), ColorRGB(1.0f, 0.0f, 0.0f));
 	PrimitiveTriangle myTriangle(Point3D(0.0f, 0.0f, 0.0f), Point3D(10.0f, 20.0f, 0.0f), Point3D(20.0f, 0.0f, 0.0f), ColorRGB(0.0f, 1.0f, 0.0f));
 	PrimitiveQuad myQuad(Point3D(-30.0f, 0.0f, 20.0f), Point3D(-30.0f, 10.0f, 20.0f), Point3D(-20.0f, 10.0f, 20.0f), Point3D(-20.0f, 0.0f, 20.0f), ColorRGB(0.0f, 0.0f, 1.0f));
 	PrimitiveCube myCube(10.0f, ColorRGB(1.0f, 0.0f, 0.0f));
@@ -135,22 +139,22 @@ void Engine::processSpecialKeys(int key, int xx, int yy)
 
 	switch (key) {
 	case GLUT_KEY_LEFT:
-		angle -= 0.03f;
-		lx = sin(angle);
-		lz = -cos(angle);
+		pd.angle -= 0.03f;
+		pd.lx = sin(pd.angle);
+		pd.lz = -cos(pd.angle);
 		break;
 	case GLUT_KEY_RIGHT:
-		angle += 0.03f;
-		lx = sin(angle);
-		lz = -cos(angle);
+		pd.angle += 0.03f;
+		pd.lx = sin(pd.angle);
+		pd.lz = -cos(pd.angle);
 		break;
 	case GLUT_KEY_UP:
-		x += lx * fraction;
-		z += lz * fraction;
+		pd.x += pd.lx * fraction;
+		pd.z += pd.lz * fraction;
 		break;
 	case GLUT_KEY_DOWN:
-		x -= lx * fraction;
-		z -= lz * fraction;
+		pd.x -=pd.lx * fraction;
+		pd.z -=pd.lz * fraction;
 		break;
 	}
 }
