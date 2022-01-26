@@ -55,7 +55,8 @@ void Engine::start()
 
 	BHandler.LoadTexture("test.bmp", 128, 128, 3);
 	if (!BHandler.getTexture())printf("Texture load failed!\n");
-	std::cout << BHandler.getWidth() << BHandler.getHeight();
+
+
 	TCube.initTexturedCube(15.0f, BHandler.getWidth(), BHandler.getHeight(), BHandler.getTexture());
 	TCube.translate(Point3D(0.0f, 30.0f, 0.0f));
 	myCube.translate(Point3D(0.0f, -20.0f, 0.0f));
@@ -63,6 +64,8 @@ void Engine::start()
 	glutMainLoop();
 	return;
 }
+
+
 
 void Engine::loop(void)
 {
@@ -74,7 +77,6 @@ void Engine::loop(void)
 	glm::mat4 MatM = glm::translate(glm::vec3(0.0f, 0.0f, -200.0f));
 	glLoadMatrixf(glm::value_ptr(MatM));   //TU SIE USTAWIA I WRZUCA CENTRUM RYSOWANKA
 	gluLookAt(pd.x, 1.0f, pd.z, pd.x + pd.lx, 1.0f, pd.z + pd.lz, 0.0f, 1.0f, 0.0f);
-
 
 	myCube.draw();
 	myQuad.draw();
@@ -148,3 +150,4 @@ void Engine::processSpecialKeys(int key, int xx, int yy)
 
 	}
 }
+

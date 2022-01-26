@@ -16,6 +16,7 @@
 #include "PrimitiveCube.h"
 #include "BitmapHandler.h"
 #include "TexturedCube.h"
+#include "Anim8torSupport.h"
 
 class Engine
 {

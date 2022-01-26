@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Anim8torSupport.cpp" />
     <ClCompile Include="BitmapHandler.cpp" />
     <ClCompile Include="ColorRGB.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
@@ -166,6 +167,8 @@
     <ClCompile Include="UpdateableObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anim8orExport.h" />
+    <ClInclude Include="Anim8torSupport.h" />
     <ClInclude Include="BitmapHandler.h" />
     <ClInclude Include="ColorRGB.h" />
     <ClInclude Include="DrawableObject.h" />
