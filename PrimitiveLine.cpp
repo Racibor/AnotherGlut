@@ -33,10 +33,3 @@ void PrimitiveLine::draw()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void PrimitiveLine::scale()
-{
-}
-
-void PrimitiveLine::rotate()
-{
-}

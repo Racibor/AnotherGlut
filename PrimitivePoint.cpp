@@ -28,12 +28,4 @@ void PrimitivePoint::draw()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void PrimitivePoint::scale()
-{
-	return;
-}
 
-void PrimitivePoint::rotate()
-{
-	return;
-}

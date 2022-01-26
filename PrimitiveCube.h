@@ -55,8 +55,6 @@ public:
 	PrimitiveCube(float size, ColorRGB col);
 	void draw();
 	void translate(Point3D t);	
-	void scale();
-	void rotate();
 
 };
 

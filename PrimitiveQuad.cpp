@@ -44,10 +44,4 @@ void PrimitiveQuad::draw()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void PrimitiveQuad::scale()
-{
-}
 
-void PrimitiveQuad::rotate()
-{
-}

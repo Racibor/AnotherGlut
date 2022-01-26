@@ -15,10 +15,6 @@ Engine* Engine::getInstance()
 	return engine;
 }
 
-void Engine::clearScreen()
-{
-
-}
 
 struct playerData {
 	float angle;
@@ -26,21 +22,21 @@ struct playerData {
 	float x, z;
 }pd = {0.0,0.0,-1.0,0.0,5.0};
 
-
-//GLfloat LightAmb[] = { 0.1, 0.1, 0.1, 1.0 };
-//GLfloat LightDif[] = { 0.7, 0.7, 0.7, 1.0 };
-//GLfloat LightPos[] = { 0, 2, 15, 1.0 };
-//GLfloat LightSpec[] = { 1, 1, 1, 1 };
+static BitmapHandler BHandler;
+static TexturedCube TCube;
+static PrimitiveQuad myQuad(Point3D(-50.0f, -50.0f, -50.0f), Point3D(50.0f, -50.0f, -50.0f), Point3D(50.0f, -50.0f, 50.0f), Point3D(-50.0f, -50.0f, 50.0f), ColorRGB(0.0f, 0.0f, 1.0f));
+static PrimitiveCube myCube(10.0f, ColorRGB(1.0f, 0.0f, 0.0f));
 
 void Engine::start()
 {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);    
 
 	GLfloat LightAmb[] = { 0.1, 0.1, 0.1, 1.0 };
 	GLfloat LightDif[] = { 0.7, 0.7, 0.7, 1.0 };
-	GLfloat LightPos[] = { 0, 102, 15, 1.0 };
+	GLfloat LightPos[] = { 0, 100, 0, 1.0 };
 	GLfloat LightSpec[] = { 1, 1, 1, 1 };
 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightAmb);
@@ -56,6 +52,13 @@ void Engine::start()
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 	glShadeModel(GL_SMOOTH);
+
+	BHandler.LoadTexture("test.bmp", 128, 128, 3);
+	if (!BHandler.getTexture())printf("Texture load failed!\n");
+	std::cout << BHandler.getWidth() << BHandler.getHeight();
+	TCube.initTexturedCube(15.0f, BHandler.getWidth(), BHandler.getHeight(), BHandler.getTexture());
+	TCube.translate(Point3D(0.0f, 30.0f, 0.0f));
+	myCube.translate(Point3D(0.0f, -20.0f, 0.0f));
 
 	glutMainLoop();
 	return;
@@ -73,25 +76,9 @@ void Engine::loop(void)
 	gluLookAt(pd.x, 1.0f, pd.z, pd.x + pd.lx, 1.0f, pd.z + pd.lz, 0.0f, 1.0f, 0.0f);
 
 
-	//TUTAJ WRZUCAC CO CHCECIE
-
-	PrimitivePoint P(Point3D(-5.0f, -5.0f, -5.0f), ColorRGB(1.0f, 1.0f, 1.0f));
-	PrimitiveLine myLine(Point3D(-25.0f, -10.0f, 30.0f), Point3D(25.0f, 10.0f, 30.0f), ColorRGB(1.0f, 0.0f, 0.0f));
-	PrimitiveTriangle myTriangle(Point3D(0.0f, 0.0f, 0.0f), Point3D(10.0f, 20.0f, 0.0f), Point3D(20.0f, 0.0f, 0.0f), ColorRGB(0.0f, 1.0f, 0.0f));
-	PrimitiveQuad myQuad(Point3D(-30.0f, 0.0f, 20.0f), Point3D(-30.0f, 10.0f, 20.0f), Point3D(-20.0f, 10.0f, 20.0f), Point3D(-20.0f, 0.0f, 20.0f), ColorRGB(0.0f, 0.0f, 1.0f));
-	PrimitiveCube myCube(10.0f, ColorRGB(1.0f, 0.0f, 0.0f));
-	myCube.translate(Point3D(0.0f, -20.0f, 0.0f));
-
-	P.draw();
-	//myLine.draw();
-	myTriangle.draw(); 
 	myCube.draw();
 	myQuad.draw();
-
-
-	
-
-	//TUTAJ JUZ NIE
+	TCube.draw();
 
 	glutSwapBuffers();
 }
@@ -103,7 +90,6 @@ void Engine::init(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
 	
-
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(1280, 720);
 	glutCreateWindow("Piekny engine by knadi, kewkacpi, wiksondixon");
@@ -123,7 +109,7 @@ void Engine::onScreenSizeChange(GLsizei w, GLsizei h)
 	// Switch to projection matrix:
 	glMatrixMode(GL_PROJECTION);
 	// Perspective projection:
-	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 130, 470);
+	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 50, 400);
 	glLoadMatrixf(glm::value_ptr(MatP));
 }
 
@@ -156,5 +142,9 @@ void Engine::processSpecialKeys(int key, int xx, int yy)
 		pd.x -=pd.lx * fraction;
 		pd.z -=pd.lz * fraction;
 		break;
+	case 'a':
+
+		break;
+
 	}
 }

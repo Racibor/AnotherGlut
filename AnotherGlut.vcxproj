@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BitmapHandler.cpp" />
     <ClCompile Include="ColorRGB.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -160,10 +161,12 @@
     <ClCompile Include="PrimitiveQuad.cpp" />
     <ClCompile Include="PrimitiveTriangle.cpp" />
     <ClCompile Include="ShapeObject.cpp" />
+    <ClCompile Include="TexturedCube.cpp" />
     <ClCompile Include="TransformableObject.cpp" />
     <ClCompile Include="UpdateableObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BitmapHandler.h" />
     <ClInclude Include="ColorRGB.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Engine.h" />
@@ -176,6 +179,8 @@
     <ClInclude Include="PrimitiveQuad.h" />
     <ClInclude Include="PrimitiveTriangle.h" />
     <ClInclude Include="ShapeObject.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TexturedCube.h" />
     <ClInclude Include="TransformableObject.h" />
     <ClInclude Include="UpdateableObject.h" />
   </ItemGroup>

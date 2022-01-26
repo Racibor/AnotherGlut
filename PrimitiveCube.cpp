@@ -35,12 +35,7 @@ void PrimitiveCube::translate(Point3D t)
 		}
 	}
 }
-void PrimitiveCube::scale()
-{
-}
-void PrimitiveCube::rotate()
-{
-}
+
 PrimitiveCube::PrimitiveCube(float size, ColorRGB col)
 {
 	for (int i = 0; i < 72; i++)

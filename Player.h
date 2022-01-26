@@ -14,6 +14,11 @@ public:
 	float lx = 0.0f, lz = -1.0f;
 	float x = 0.0f, z = 5.0f;
 
+	struct position
+	{
+		float x = 0.0f, y = 0.0f, z = 0.0f;
+	}pos;
+
 	void refreshLook();
 };
 

@@ -23,8 +23,5 @@ public:
 	PrimitiveQuad(Point3D p1, Point3D p2, Point3D p3,Point3D p4, ColorRGB col);
 	void translate(Point3D t);
 	void draw();
-	void scale();
-	void rotate();
-
 };
 

@@ -21,8 +21,6 @@ public:
 	PrimitivePoint(Point3D w, ColorRGB col);
 	void translate(Point3D t);
 	void draw();
-	void scale();
-	void rotate();
 
 };
 

@@ -5,7 +5,5 @@ class TransformableObject
 {
 public:
       void virtual translate(Point3D t) = 0;
-      void virtual rotate() = 0;
-      void virtual scale() = 0;
 };
 

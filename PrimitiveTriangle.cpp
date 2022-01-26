@@ -40,10 +40,4 @@ void PrimitiveTriangle::draw()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void PrimitiveTriangle::scale()
-{
-}
 
-void PrimitiveTriangle::rotate()
-{
-}

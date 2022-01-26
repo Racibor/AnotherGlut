@@ -14,6 +14,8 @@
 #include "PrimitiveQuad.h"
 #include "Player.h"
 #include "PrimitiveCube.h"
+#include "BitmapHandler.h"
+#include "TexturedCube.h"
 
 class Engine
 {
@@ -28,7 +30,7 @@ public:
 	static Player myPlayer;
 	
 
-	void clearScreen();
+
 	void start();
 	static void loop(void);
 	void init(int argc, char* argv[]);
