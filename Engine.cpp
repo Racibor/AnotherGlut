@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "models/vase.c"
 #include "models/earth2.c"
+#include "models/astro2.c"
 
 Engine* Engine::engine = 0;
 
@@ -16,7 +17,6 @@ Engine* Engine::getInstance()
 	}
 	return engine;
 }
-
 
 struct playerData {
 	float angle;
@@ -40,7 +40,7 @@ void Engine::start()
 
 	GLfloat LightAmb[] = { 0.1, 0.1, 0.1, 1.0 };
 	GLfloat LightDif[] = { 0.7, 0.7, 0.7, 1.0 };
-	GLfloat LightPos[] = { 0, 100, 0, 1.0 };
+	GLfloat LightPos[] = { 0, 100, 100, 1.0 };
 	GLfloat LightSpec[] = { 1, 1, 1, 1 };
 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightAmb);
@@ -74,8 +74,9 @@ void Engine::start()
 	return;
 }
 
-
 GLfloat angle = 0; // DO AN
+GLfloat plrObjectOffsetX = 0;
+GLfloat plrObjectOffsetZ = 0;
 
 void Engine::loop(void)
 {
@@ -105,6 +106,14 @@ void Engine::loop(void)
 	glLoadMatrixf(value_ptr(MatM));
 	Anim8torSupport::draw(&object_vase);
 
+	glm::mat4 MatM2 = glm::translate(glm::vec3(-10.0f + plrObjectOffsetX * 3 ,-15.0f,-45.0f + plrObjectOffsetZ * 3));
+	glLoadMatrixf(glm::value_ptr(MatM2));
+	Anim8torSupport::draw(&object_astro);
+
+	plrObjectOffsetZ = (plrObjectOffsetZ <= 0.0) ? (plrObjectOffsetZ):(plrObjectOffsetZ - 0.02);
+	plrObjectOffsetZ = (plrObjectOffsetZ >= 0.0) ? (plrObjectOffsetZ):(plrObjectOffsetZ + 0.02);
+	plrObjectOffsetX = (plrObjectOffsetX <= 0.0) ? (plrObjectOffsetX):(plrObjectOffsetX - 0.02);
+	plrObjectOffsetX = (plrObjectOffsetX >= 0.0) ? (plrObjectOffsetX):(plrObjectOffsetX + 0.02);
 	
 	glutSwapBuffers();
 }
@@ -143,7 +152,7 @@ void Engine::onScreenSizeChange(GLsizei w, GLsizei h)
 	// Switch to projection matrix:
 	glMatrixMode(GL_PROJECTION);
 	// Perspective projection:
-	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 50, 400);
+	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 10, 400);
 	glLoadMatrixf(glm::value_ptr(MatP));
 }
 
@@ -160,15 +169,19 @@ void Engine::processKeys(unsigned char key, int xx, int yy)
 	{
 	case 'w':
 		myPlayer.position += myPlayer.sensitivity * myPlayer.lookingAt;
+		plrObjectOffsetZ = (plrObjectOffsetZ < 1.0) ? (plrObjectOffsetZ + 0.1) : (plrObjectOffsetZ);
 		break;
 	case 's':
 		myPlayer.position -= myPlayer.sensitivity * myPlayer.lookingAt;
+		plrObjectOffsetZ = (plrObjectOffsetZ > -1.0) ? (plrObjectOffsetZ - 0.1) : (plrObjectOffsetZ);
 		break;
 	case 'a':
 		myPlayer.position -= glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
+		plrObjectOffsetX = (plrObjectOffsetX < 1.0) ? (plrObjectOffsetX + 0.1) : (plrObjectOffsetX);
 		break;
 	case 'd':
 		myPlayer.position += glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
+		plrObjectOffsetX = (plrObjectOffsetX > -1.0) ? (plrObjectOffsetX - 0.1) : (plrObjectOffsetX);
 		break;
 	case 'm':
 		glutLeaveMainLoop();
@@ -178,18 +191,6 @@ void Engine::processKeys(unsigned char key, int xx, int yy)
 
 void Engine::processMouse(int xx, int yy)
 {
-	//if (myPlayer.firstMouse)
-	//{
-	//	myPlayer.lastX = xx;
-	//	myPlayer.lastY = yy;
-	//	myPlayer.firstMouse = false;
-	//}
-
-	//float xoffset = xx - myPlayer.lastX;
-	//float yoffset = myPlayer.lastY - yy;
-	//myPlayer.lastX = xx;
-	//myPlayer.lastY = yy;
-
 	float xoffset = xx - 1280 / 2;
 	float yoffset = 720 / 2 - yy;
 
