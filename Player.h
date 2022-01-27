@@ -6,19 +6,24 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "Point3D.h"
+#include <glm/gtx/rotate_vector.hpp>
 
 class Player
 {
 public:
-	float angle = 0.0;
-	float lx = 0.0f, lz = -1.0f;
-	float x = 0.0f, z = 5.0f;
+	glm::vec3 position;
+	glm::vec3 lookingAt;
+	glm::vec3 upVec;
+	
+	bool firstMouse = true;
+	float lastX, lastY, yaw, pitch;
 
-	struct position
-	{
-		float x = 0.0f, y = 0.0f, z = 0.0f;
-	}pos;
+	float sensitivity = 1.0f;
 
-	void refreshLook();
+	void move(glm::vec3 v);
+	void rotate();
+	void defaultPos();
+	glm::mat4 Look();
 };
 

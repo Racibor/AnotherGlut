@@ -28,8 +28,6 @@ private:
 public:
 	static Engine* engine;
 	static Engine* getInstance();
-	static Player myPlayer;
-	
 
 
 	void start();
@@ -38,7 +36,7 @@ public:
 	void exit();
 	static void onScreenSizeChange(GLsizei w, GLsizei h);
 	static void OnIdle();
-	static void processSpecialKeys(int key, int xx, int yy);
-
+	static void processMouse(int xx, int yy);
+	static void processKeys(unsigned char key, int xx, int yy);
 };
 

@@ -12,5 +12,6 @@ class Anim8torSupport
 {
 public:
 	static void draw(struct Anim8orObject* obj);
+	static void drawTex(Anim8orObject* obj, int tex_id);
 };
 
