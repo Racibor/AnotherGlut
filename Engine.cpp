@@ -85,9 +85,11 @@ void Engine::loop(void)
 	glMatrixMode(GL_MODELVIEW);
 
 	glm::mat4 MatM = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
+	MatM = MatM * myPlayer.Look();
+	glLoadMatrixf(glm::value_ptr(MatM));
+
 	MatM = glm::translate(MatM,glm::vec3(0.0f, 0.0f, -250.0f));
 	MatM = glm::rotate(MatM, angle*0.5f, glm::vec3(0, 1, 0));
-	MatM = MatM * myPlayer.Look();
 	glLoadMatrixf(glm::value_ptr(MatM));
 	Anim8torSupport::drawTex(&object_earth, Tex_Earth.getTexID());
 
@@ -102,6 +104,7 @@ void Engine::loop(void)
 
 	glLoadMatrixf(value_ptr(MatM));
 	Anim8torSupport::draw(&object_vase);
+
 	
 	glutSwapBuffers();
 }
@@ -156,17 +159,20 @@ void Engine::processKeys(unsigned char key, int xx, int yy)
 	switch (key)
 	{
 	case 'w':
-			myPlayer.position += myPlayer.sensitivity * myPlayer.lookingAt;
-			break;
+		myPlayer.position += myPlayer.sensitivity * myPlayer.lookingAt;
+		break;
 	case 's':
-			myPlayer.position -= myPlayer.sensitivity * myPlayer.lookingAt;
-			break;
+		myPlayer.position -= myPlayer.sensitivity * myPlayer.lookingAt;
+		break;
 	case 'a':
-			myPlayer.position -= glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
-			break;
+		myPlayer.position -= glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
+		break;
 	case 'd':
-			myPlayer.position += glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
-			break;
+		myPlayer.position += glm::normalize(glm::cross(myPlayer.lookingAt, myPlayer.upVec)) * myPlayer.sensitivity;
+		break;
+	case 'm':
+		glutLeaveMainLoop();
+		break;
 	}
 }
 
