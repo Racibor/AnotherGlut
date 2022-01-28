@@ -16,6 +16,7 @@ private:
 	int height;
 public:
 	void LoadTexture(const char* name, int w, int h, int nchan);
+	static unsigned char* LoadRawTexture(const char* name, int w, int h, int nchan);
 	void initializeTexture();
 	void deleteTexture();
 	unsigned char* getTexture();

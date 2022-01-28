@@ -25,8 +25,10 @@ struct playerData {
 }pd = {0.0,0.0,-1.0,0.0,5.0};
 
 static BitmapHandler BHandler;
+static BitmapHandler Tex_Skybox;
 static BitmapHandler Tex_Earth;
 static TexturedCube TCube;
+static TexturedCube Skybox;
 static PrimitiveQuad myQuad(Point3D(-50.0f, -50.0f, -50.0f), Point3D(50.0f, -50.0f, -50.0f), Point3D(50.0f, -50.0f, 50.0f), Point3D(-50.0f, -50.0f, 50.0f), ColorRGB(0.0f, 0.0f, 1.0f));
 static PrimitiveCube myCube(10.0f, ColorRGB(1.0f, 0.0f, 0.0f));
 static Player myPlayer;
@@ -59,13 +61,18 @@ void Engine::start()
 	glutSetCursor(GLUT_CURSOR_NONE);
 	myPlayer.defaultPos();
 
-	BHandler.LoadTexture("test.bmp", 128, 128, 3);
-	Tex_Earth.LoadTexture("earth.bmp", 1024, 1024, 3);
+	BHandler.LoadTexture("gfx/test.bmp", 128, 128, 3);
+	Tex_Earth.LoadTexture("gfx/earth.bmp", 1024, 1024, 3);
+	Tex_Skybox.LoadTexture("gfx/sky.bmp", 720, 720, 3);
+	//Tex_Skybox.LoadTexture("sky.bmp", 720, 720, 3);
 	if (!BHandler.getTexture())printf("Texture load failed!\n");
 	if (!Tex_Earth.getTexture())printf("Texture load failed!\n");
+	if (!Tex_Skybox.getTexture())printf("Texture load failed!\n");
 	Tex_Earth.initializeTexture();
 
 	TCube.initTexturedCube(15.0f, BHandler.getWidth(), BHandler.getHeight(), BHandler.getTexture());
+	Skybox.initTexturedCube(500.0f, Tex_Skybox.getWidth(), Tex_Skybox.getHeight(), Tex_Skybox.getTexture());
+
 	TCube.translate(Point3D(0.0f, 30.0f, 0.0f));
 	myCube.translate(Point3D(0.0f, -20.0f, 0.0f));
 
@@ -110,6 +117,11 @@ void Engine::loop(void)
 	glLoadMatrixf(glm::value_ptr(MatM2));
 	Anim8torSupport::draw(&object_astro);
 
+	glm::mat4 MatM3 = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)) * myPlayer.Look();
+	MatM3 = glm::translate(MatM3, glm::vec3(myPlayer.position));
+	glLoadMatrixf(glm::value_ptr(MatM3));
+	Skybox.draw();
+
 	plrObjectOffsetZ = (plrObjectOffsetZ <= 0.0) ? (plrObjectOffsetZ):(plrObjectOffsetZ - 0.02);
 	plrObjectOffsetZ = (plrObjectOffsetZ >= 0.0) ? (plrObjectOffsetZ):(plrObjectOffsetZ + 0.02);
 	plrObjectOffsetX = (plrObjectOffsetX <= 0.0) ? (plrObjectOffsetX):(plrObjectOffsetX - 0.02);
@@ -149,10 +161,8 @@ void Engine::onScreenSizeChange(GLsizei w, GLsizei h)
 {
 	if (h == 0)	h = 1;
 	glViewport(0, 0, w, h);
-	// Switch to projection matrix:
 	glMatrixMode(GL_PROJECTION);
-	// Perspective projection:
-	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 10, 400);
+	glm::mat4 MatP = glm::perspective<float>(glm::radians(50.0f), (float)w / h, 10, 800);
 	glLoadMatrixf(glm::value_ptr(MatP));
 }
 
@@ -164,7 +174,6 @@ void Engine::OnIdle() {
 
 void Engine::processKeys(unsigned char key, int xx, int yy)
 {
-	std::cout << myPlayer.position.x <<" "<< myPlayer.position.y << " " << myPlayer.position.z << std::endl;
 	switch (key)
 	{
 	case 'w':

@@ -9,6 +9,10 @@ void BitmapHandler::LoadTexture(const char* name, int w, int h, int nchan)
 	height = h;
 	tex = stbi_load(name, &w, &h, &nchan, 0);
 }
+unsigned char* BitmapHandler::LoadRawTexture(const char* name, int w, int h, int nchan)
+{
+	return stbi_load(name, &w, &h, &nchan, 0);
+}
 
 void BitmapHandler::initializeTexture()
 {
