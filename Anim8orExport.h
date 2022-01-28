@@ -1,4 +1,5 @@
 // Anim8orExport.h
+// TO S¥ STRUKTURY DO ANIM8TORA
 
 #if !defined(__ANIM8OR_EXPORT_H)
 #define __ANIM8OR_EXPORT_H 1

@@ -4,15 +4,12 @@ enum Display {
 	WINDOW, FULLSCREEN
 };
 
-enum Resolution {
-	HD, FHD
-};
-
 class EngineConfiguration
 {
 public:
 	enum Display display;
-	enum Resolution resolution;
+	int res_x;
+	int res_y;
 	int fps;
 	bool keyboard;
 	bool mouse;

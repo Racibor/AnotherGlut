@@ -8,10 +8,13 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "ShapeObject.h"
 
-
+/*!
+ * @brief Klasa definiujaca prymitywny szescian zawierajacy teksture
+*/
 class TexturedCube: public ShapeObject
 {
 private:
+
 	GLuint TexID[1];
 
 	float cube_vert[72] = {
@@ -47,8 +50,21 @@ private:
 	};
 
 public:
+	/*!
+     * @brief Konstruktor prymitywnego szescianu z tekstura
+     * @param size Rozmiar
+     * @param col Kolor
+     * @param texture Tekstura
+	*/
 	void initTexturedCube(float size, int width, int height, unsigned char* texture);
+	/*!
+	 * @brief Rysuje teksturowany szescian
+	*/
 	void draw();
+	/*!
+	* @brief Przemieszcza szescian o dany wektor wyznaczany przez punkt
+	* @param t Wektor wyrazany przez punkt do przemieszczenia
+	*/
 	void translate(Point3D t);
 };
 

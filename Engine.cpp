@@ -18,11 +18,7 @@ Engine* Engine::getInstance()
 	return engine;
 }
 
-struct playerData {
-	float angle;
-	float lx, lz;
-	float x, z;
-}pd = {0.0,0.0,-1.0,0.0,5.0};
+
 
 static BitmapHandler BHandler;
 static BitmapHandler Tex_Skybox;
@@ -64,7 +60,7 @@ void Engine::start()
 	BHandler.LoadTexture("gfx/test.bmp", 128, 128, 3);
 	Tex_Earth.LoadTexture("gfx/earth.bmp", 1024, 1024, 3);
 	Tex_Skybox.LoadTexture("gfx/sky.bmp", 720, 720, 3);
-	//Tex_Skybox.LoadTexture("sky.bmp", 720, 720, 3);
+
 	if (!BHandler.getTexture())printf("Texture load failed!\n");
 	if (!Tex_Earth.getTexture())printf("Texture load failed!\n");
 	if (!Tex_Skybox.getTexture())printf("Texture load failed!\n");
@@ -80,9 +76,11 @@ void Engine::start()
 	glutMainLoop();
 	return;
 }
-
-GLfloat angle = 0; // DO AN
+//! Obrot do animacji
+GLfloat angle = 0; 
+//! Odsuniecie gracza w osi X
 GLfloat plrObjectOffsetX = 0;
+//! Odsuniecie gracza w osi Z
 GLfloat plrObjectOffsetZ = 0;
 
 void Engine::loop(void)
@@ -93,7 +91,7 @@ void Engine::loop(void)
 	glMatrixMode(GL_MODELVIEW);
 
 	glm::mat4 MatM = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f));
-	MatM = MatM * myPlayer.Look();
+	MatM = MatM * myPlayer.getCameraViewMatrix();
 	glLoadMatrixf(glm::value_ptr(MatM));
 
 	MatM = glm::translate(MatM,glm::vec3(0.0f, 0.0f, -250.0f));
@@ -117,7 +115,7 @@ void Engine::loop(void)
 	glLoadMatrixf(glm::value_ptr(MatM2));
 	Anim8torSupport::draw(&object_astro);
 
-	glm::mat4 MatM3 = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)) * myPlayer.Look();
+	glm::mat4 MatM3 = glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)) * myPlayer.getCameraViewMatrix();
 	MatM3 = glm::translate(MatM3, glm::vec3(myPlayer.position));
 	glLoadMatrixf(glm::value_ptr(MatM3));
 	Skybox.draw();
@@ -131,12 +129,10 @@ void Engine::loop(void)
 }
 
 
-#define ANIM_FPS 60
-
-void OnTimer(int val) {
+void Engine::OnTimer(int val) {
 	angle = (angle == 360) ? 0 : (angle + 0.01);
 	glutPostRedisplay();
-	glutTimerFunc(1000 / ANIM_FPS, OnTimer, 0);
+	glutTimerFunc(1000 / EngineConfiguration::getDefaultConfig().fps, OnTimer, 0);
 }
 
 void Engine::init(int argc, char* argv[])
@@ -144,15 +140,15 @@ void Engine::init(int argc, char* argv[])
 	glutInit(&argc, argv);
 	
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(1280, 720);
-	glutCreateWindow("Piekny engine by knadi, kewkacpi, wiksondixon");
+	glutInitWindowSize(EngineConfiguration::getDefaultConfig().res_x, EngineConfiguration::getDefaultConfig().res_y);
+	glutCreateWindow("3D ENGINE PROTOTYPE BY WIKTOR SIMLAT, KACPI ROBAK, ADI RUBAK. MOVE WITH WASD, CAMERA MOVEMENT WITH MOUSE, EXIT WITH M KEY");
 
 	glutDisplayFunc(Engine::loop);
 	glutReshapeFunc(Engine::onScreenSizeChange);
 	glutIdleFunc(Engine::OnIdle);
 	glutPassiveMotionFunc(Engine::processMouse);
 	glutKeyboardFunc(Engine::processKeys);
-	glutTimerFunc(1000 / ANIM_FPS, OnTimer, 0);
+	glutTimerFunc(1000 / EngineConfiguration::getDefaultConfig().fps, OnTimer, 0);
 
 	return;
 }

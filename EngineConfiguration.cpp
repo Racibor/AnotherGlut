@@ -4,7 +4,8 @@ EngineConfiguration EngineConfiguration::getDefaultConfig()
 {
 	EngineConfiguration conf = EngineConfiguration();
 	conf.display = WINDOW;
-	conf.resolution = HD;
+	conf.res_x = 1280;
+	conf.res_y = 720;
 	conf.fps = 60;
 	conf.keyboard = true;
 	conf.mouse = true;

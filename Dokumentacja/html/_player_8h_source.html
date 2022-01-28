@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SILNIK 3D: Plik źródłowy Player.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="test.bmp"/></td>
+  <td id="projectalign">
+   <div id="projectname">SILNIK 3D<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Silnik 3D autorstwa Wiktor Simlat, Kacper Robak, Adrian Rubak 3ID13A</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Szukaj','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_player_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Player.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;EngineConfiguration.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;gl\gl.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;gl\freeglut.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;glm/gtx/transform.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;Point3D.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;glm/gtx/rotate_vector.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;glm/gtc/matrix_transform.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_player.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_player.html">Player</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_player.html#ae87a2450a5dfda9089d72e081954194c">   20</a></span>    glm::vec3 <a class="code hl_variable" href="class_player.html#ae87a2450a5dfda9089d72e081954194c">position</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_player.html#ade236e80e68940089e4b3bb57634b69e">   22</a></span>    glm::vec3 <a class="code hl_variable" href="class_player.html#ade236e80e68940089e4b3bb57634b69e">lookingAt</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_player.html#a9089986a838482bbcabf1af3d45d7d4a">   24</a></span>    glm::vec3 <a class="code hl_variable" href="class_player.html#a9089986a838482bbcabf1af3d45d7d4a">upVec</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_player.html#ac2d42ad11e1de540ec312efeabe42507">   26</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="class_player.html#ac2d42ad11e1de540ec312efeabe42507">yaw</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_player.html#a4e65dde5da9989d7ced883e9f5cffa18">   28</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="class_player.html#a4e65dde5da9989d7ced883e9f5cffa18">pitch</a>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_player.html#a68902885589f52b07cd6ebef902d4c55">   30</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="class_player.html#a68902885589f52b07cd6ebef902d4c55">sensitivity</a> = 1.0f;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_player.html#a46a153a36a71f71511da40a3ec3d0753">move</a>(glm::vec3 v);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_player.html#a31b85bf899a3c56a8884713946a3b190">defaultPos</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    glm::mat4 <a class="code hl_function" href="class_player.html#a5cea818377e5a5c0bfc7137104f8c777">getCameraViewMatrix</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="ttc" id="aclass_player_html"><div class="ttname"><a href="class_player.html">Player</a></div><div class="ttdoc">Klasa definiujaca gracza i jego kamere.</div><div class="ttdef"><b>Definition:</b> Player.h:17</div></div>
+<div class="ttc" id="aclass_player_html_a31b85bf899a3c56a8884713946a3b190"><div class="ttname"><a href="class_player.html#a31b85bf899a3c56a8884713946a3b190">Player::defaultPos</a></div><div class="ttdeci">void defaultPos()</div><div class="ttdoc">Ustawia pozycje poczatkowa i parametry kamery.</div><div class="ttdef"><b>Definition:</b> Player.cpp:9</div></div>
+<div class="ttc" id="aclass_player_html_a46a153a36a71f71511da40a3ec3d0753"><div class="ttname"><a href="class_player.html#a46a153a36a71f71511da40a3ec3d0753">Player::move</a></div><div class="ttdeci">void move(glm::vec3 v)</div><div class="ttdoc">Przemieszcza gracza wzgledem danego wektora.</div><div class="ttdef"><b>Definition:</b> Player.cpp:3</div></div>
+<div class="ttc" id="aclass_player_html_a4e65dde5da9989d7ced883e9f5cffa18"><div class="ttname"><a href="class_player.html#a4e65dde5da9989d7ced883e9f5cffa18">Player::pitch</a></div><div class="ttdeci">float pitch</div><div class="ttdoc">Wertykalne polozenie myszki.</div><div class="ttdef"><b>Definition:</b> Player.h:28</div></div>
+<div class="ttc" id="aclass_player_html_a5cea818377e5a5c0bfc7137104f8c777"><div class="ttname"><a href="class_player.html#a5cea818377e5a5c0bfc7137104f8c777">Player::getCameraViewMatrix</a></div><div class="ttdeci">glm::mat4 getCameraViewMatrix()</div><div class="ttdoc">Zwraca macierz widoku kamery gracza.</div><div class="ttdef"><b>Definition:</b> Player.cpp:16</div></div>
+<div class="ttc" id="aclass_player_html_a68902885589f52b07cd6ebef902d4c55"><div class="ttname"><a href="class_player.html#a68902885589f52b07cd6ebef902d4c55">Player::sensitivity</a></div><div class="ttdeci">float sensitivity</div><div class="ttdoc">Czulosc kamery i sterowania.</div><div class="ttdef"><b>Definition:</b> Player.h:30</div></div>
+<div class="ttc" id="aclass_player_html_a9089986a838482bbcabf1af3d45d7d4a"><div class="ttname"><a href="class_player.html#a9089986a838482bbcabf1af3d45d7d4a">Player::upVec</a></div><div class="ttdeci">glm::vec3 upVec</div><div class="ttdoc">Wektor normalny gracza.</div><div class="ttdef"><b>Definition:</b> Player.h:24</div></div>
+<div class="ttc" id="aclass_player_html_ac2d42ad11e1de540ec312efeabe42507"><div class="ttname"><a href="class_player.html#ac2d42ad11e1de540ec312efeabe42507">Player::yaw</a></div><div class="ttdeci">float yaw</div><div class="ttdoc">Horyzontalne polozenie myszki.</div><div class="ttdef"><b>Definition:</b> Player.h:26</div></div>
+<div class="ttc" id="aclass_player_html_ade236e80e68940089e4b3bb57634b69e"><div class="ttname"><a href="class_player.html#ade236e80e68940089e4b3bb57634b69e">Player::lookingAt</a></div><div class="ttdeci">glm::vec3 lookingAt</div><div class="ttdoc">Wektor punktu, w ktory patrzy gracz.</div><div class="ttdef"><b>Definition:</b> Player.h:22</div></div>
+<div class="ttc" id="aclass_player_html_ae87a2450a5dfda9089d72e081954194c"><div class="ttname"><a href="class_player.html#ae87a2450a5dfda9089d72e081954194c">Player::position</a></div><div class="ttdeci">glm::vec3 position</div><div class="ttdoc">Wektor pozycji.</div><div class="ttdef"><b>Definition:</b> Player.h:20</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Player.h</b></li>
+    <li class="footer">Wygenerowano przez <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
+</body>
+</html>

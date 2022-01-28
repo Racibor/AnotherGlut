@@ -10,6 +10,9 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+/*!
+ * @brief Klasa opisujaca prymitywny szescian
+*/
 class PrimitiveCube: public ShapeObject
 {
 	float cube_vert[72] = {
@@ -52,8 +55,20 @@ class PrimitiveCube: public ShapeObject
 		0.3f, 1.0f, 0.3f,	0.3f, 1.0f, 0.3f,	0.3f, 1.0f, 0.3f,	0.3f, 1.0f, 0.3f
 	};
 public:
+	/*!
+	 * @brief Konstruktor prymitywnego szescianu
+	 * @param size Rozmiar
+	 * @param col Kolor
+	*/
 	PrimitiveCube(float size, ColorRGB col);
+	/*!
+	 * @brief Rysuje szescian
+	*/
 	void draw();
+	/*!
+	 * @brief Przemieszcza szescian o dany wektor wyznaczany przez punkt
+	 * @param t Wektor wyrazany przez punkt do przemieszczenia
+	*/
 	void translate(Point3D t);	
 
 };
